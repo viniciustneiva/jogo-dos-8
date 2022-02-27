@@ -16,9 +16,11 @@ public class App {
 
 		System.out.println("Tabela gerada aleatoriamente!");
 		t.imprime(t.getTabela());
+
 		System.out.println("--------------");
 		System.out.println("Resultado desejado: ");
 		t.imprime(t.getResultado());
+
 		System.out.println("--------------");
 		System.out.println("Distância Heurística entre as posições: ");
 
@@ -36,8 +38,5 @@ public class App {
 			}
 			System.out.println("|");
 		}
-		
-
 	}
-	
 }

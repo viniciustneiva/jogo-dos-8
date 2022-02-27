@@ -35,9 +35,7 @@ public class Tabela {
 	}
 	
 	public void imprime(Map<Integer, String> t) {
-
 		int count = 0;
-
 		for (Integer key: t.keySet()){  
 			System.out.print(t.get(key)+" ");
 			count++;
@@ -50,9 +48,7 @@ public class Tabela {
 	
 	
 	public static void embaralhar(String [] v) {
-
 		Random random = new Random();
-
 		for (int i=0; i < (v.length - 1); i++) {
 			//sorteia um �ndice
 			int j = random.nextInt(v.length);
