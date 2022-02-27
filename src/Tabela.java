@@ -4,15 +4,17 @@ public class Tabela {
 	private String[][] tabela;
 	private String[] elementos = {" ", "1", "2", "3", "4", "5", "6", "7", "8"};
 	private String[] resultado = {"1", "2", "3", "8", " ", "4", "7", "6", "5"};
+									
+
 	
 	public static void embaralhar(String [] v) {
 
 		Random random = new Random();
 
 		for (int i=0; i < (v.length - 1); i++) {
-			//sorteia um índice
+			//sorteia um ï¿½ndice
 			int j = random.nextInt(v.length);
-			//troca o conteúdo dos índices i e j do vetor
+			//troca o conteï¿½do dos ï¿½ndices i e j do vetor
 			String temp = v[i];
 			v[i] = v[j];
 			v[j] = temp;
@@ -42,13 +44,13 @@ public class Tabela {
 		}
 	}
 	
-public void imprimeResultado() {
-	System.out.println("Resultado final:");
+	public void imprimeResultado() {
+		System.out.println("Resultado final:");
 		String[][] resposta = resultado();
 		for(int linha = 0; linha < 3; linha++) {
 			for(int coluna = 0; coluna < 3; coluna++) {
 				System.out.print(resposta[linha][coluna]+" ");
-			
+				
 			}
 			System.out.println("");
 		}
@@ -66,4 +68,5 @@ public void imprimeResultado() {
 		
 		return gabarito;
 	}
+
 }
