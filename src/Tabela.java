@@ -1,11 +1,53 @@
 import java.util.*;
 
 public class Tabela {
-	private String[][] tabela;
+	private Map<Integer, String> tabela = new HashMap<>();
 	private String[] elementos = {" ", "1", "2", "3", "4", "5", "6", "7", "8"};
-	private String[] resultado = {"1", "2", "3", "8", " ", "4", "7", "6", "5"};
-									
+	private Map<Integer, String> resultado = new HashMap<>(); // {"1", "2", "3", "8", " ", "4", "7", "6", "5"};
+	
+	Tabela(){
+		embaralhar(elementos);
+		for(int i = 0; i < 9; i++){
+			this.tabela.put(i,this.elementos[i]);
+		}
+	}
 
+	public Map<Integer, String> getTabela(){
+		return this.tabela;
+	}
+
+	public  Map<Integer, String> getResultado() {
+		Map<Integer, String> resultado = new HashMap<>();
+		resultado.put(0,"1");
+		resultado.put(1,"2");
+		resultado.put(2,"3");
+		resultado.put(3,"8");
+		resultado.put(4," ");
+		resultado.put(5,"4");
+		resultado.put(6,"7");
+		resultado.put(7,"6");
+		resultado.put(8,"5");
+		return resultado;
+	}
+
+	public String[] getElementos(){
+		return this.elementos;
+	}
+	
+	public void imprime(Map<Integer, String> t) {
+
+		int count = 0;
+
+		for (Integer key: t.keySet()){  
+			System.out.print(t.get(key)+" ");
+			count++;
+			if(count == 3){
+				System.out.println("");
+				count = 0;
+			}
+		}
+	}
+	
 	
 	public static void embaralhar(String [] v) {
 
@@ -20,53 +62,6 @@ public class Tabela {
 			v[j] = temp;
 		}
 
-	}
-	
-	Tabela(){
-		tabela = new String[3][3];
-		embaralhar(elementos);
-		int k = 0;
-		for(int linha = 0; linha < 3 && k<9; linha++) {
-			for(int coluna = 0; coluna < 3 && k<9; coluna++) {
-				this.tabela[linha][coluna] = elementos[k];
-				k++;
-			}
-		}
-	}
-	
-	public void imprime() {
-		System.out.println("Tabela gerada aleatoriamente!");
-		for(int linha = 0; linha < 3; linha++) {
-			for(int coluna = 0; coluna < 3; coluna++) {
-				System.out.print(this.tabela[linha][coluna]+" ");
-			}
-			System.out.println("");
-		}
-	}
-	
-	public void imprimeResultado() {
-		System.out.println("Resultado final:");
-		String[][] resposta = resultado();
-		for(int linha = 0; linha < 3; linha++) {
-			for(int coluna = 0; coluna < 3; coluna++) {
-				System.out.print(resposta[linha][coluna]+" ");
-				
-			}
-			System.out.println("");
-		}
-	}
-	
-	public String[][] resultado() {
-		String[][] gabarito = new String[3][3];
-		int k = 0;
-		for(int linha = 0; linha < 3  && k<9 ; linha++) {
-			for(int coluna = 0; coluna < 3  && k<9; coluna++) {
-				gabarito[linha][coluna] = this.resultado[k];
-				k++;
-			}
-		}
-		
-		return gabarito;
 	}
 
 }

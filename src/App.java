@@ -13,10 +13,12 @@ public class App {
 		dH.put(6, new String[] {"2", "3", "4", "1", "2", "3", "0", "1", "2"});
 		dH.put(7, new String[] {"3", "2", "3", "2", "1", "2", "1", "0", "1"});
 		dH.put(8, new String[] {"4", "3", "2", "3", "2", "1", "2", "1", "0"});
-		
-		t.imprime();
+
+		System.out.println("Tabela gerada aleatoriamente!");
+		t.imprime(t.getTabela());
 		System.out.println("--------------");
-		t.imprimeResultado();
+		System.out.println("Resultado desejado: ");
+		t.imprime(t.getResultado());
 		System.out.println("--------------");
 		System.out.println("Distância Heurística entre as posições: ");
 
