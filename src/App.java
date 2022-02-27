@@ -23,7 +23,7 @@ public class App {
 		int i;
 		for(int j = 0; j<9; j++){
 			i = 0;
-			System.out.print("|");
+			System.out.print("Peça "+j+" |");
 			for(String s:dH.get(j)){
 				if(i == 8){
 					System.out.print(s);
@@ -32,7 +32,7 @@ public class App {
 				}
 				i++;
 			}
-			System.out.print("|");
+			System.out.println("|");
 		}
 		
 
