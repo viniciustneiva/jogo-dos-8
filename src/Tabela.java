@@ -1,15 +1,19 @@
 import java.util.*;
 
 public class Tabela {
-	private Map<Integer, String> tabela = new HashMap<>();
+	private Map<Integer, String> tabela;
 	private String[] elementos = {"0", "1", "2", "3", "4", "5", "6", "7", "8"};
-	private Map<Integer, String> resultado = new HashMap<>(); // {"1", "2", "3", "8", " ", "4", "7", "6", "5"};
-
-	
+	private Map<Integer, String> resultado; // {"1", "2", "3", "8", " ", "4", "7", "6", "5"};
+	private ArrayList<Tabela> estados;
+	private int contagem;
 	Tabela(){
+		this.contagem = 0;
+		this.tabela = new HashMap<>();
+		this.resultado = new HashMap<>();
+		this.estados = new ArrayList<Tabela>();
 		embaralhar(elementos);
 		for(int i = 0; i < 9; i++){
-			this.tabela.put(i,this.elementos[i]);
+			this.tabela.put(i, this.elementos[i]);
 		}
 	}
 
@@ -17,18 +21,27 @@ public class Tabela {
 		return this.tabela;
 	}
 
+	public ArrayList<Tabela> getEstados(){
+		return this.estados;
+	}
+
 	public  Map<Integer, String> getResultado() {
-		Map<Integer, String> resultado = new HashMap<>();
-		resultado.put(0,"1");
-		resultado.put(1,"2");
-		resultado.put(2,"3");
-		resultado.put(3,"8");
-		resultado.put(4,"0");
-		resultado.put(5,"4");
-		resultado.put(6,"7");
-		resultado.put(7,"6");
-		resultado.put(8,"5");
+
+		this.resultado.put(0,"1");
+		this.resultado.put(1,"2");
+		this.resultado.put(2,"3");
+		this.resultado.put(3,"8");
+		this.resultado.put(4,"0");
+		this.resultado.put(5,"4");
+		this.resultado.put(6,"7");
+		this.resultado.put(7,"6");
+		this.resultado.put(8,"5");
+		
 		return resultado;
+	}
+
+	public String[] getElementos(){
+		return this.elementos;
 	}
 
 	public boolean posDisponivel(int pos){
@@ -38,10 +51,6 @@ public class Tabela {
 		}
 
 		return false;
-	}
-
-	public String[] getElementos(){
-		return this.elementos;
 	}
 	
 	public void imprime(Map<Integer, String> t) {
@@ -60,9 +69,7 @@ public class Tabela {
 	public static void embaralhar(String [] v) {
 		Random random = new Random();
 		for (int i=0; i < (v.length - 1); i++) {
-			//sorteia um �ndice
 			int j = random.nextInt(v.length);
-			//troca o conte�do dos �ndices i e j do vetor
 			String temp = v[i];
 			v[i] = v[j];
 			v[j] = temp;
@@ -73,6 +80,7 @@ public class Tabela {
 	public void move(int atual, int posFinal){
 		if(posDisponivel(posFinal) && podeMover(atual, posFinal)){
 			troca(atual, posFinal);
+			this.contagem++;
 		}else{
 			System.out.println("Posicao ocupada ou nao é vizinho!");
 		}
@@ -93,6 +101,15 @@ public class Tabela {
 
 	}
 
+	private boolean igual(Tabela t,Map<Integer, String> r){
+		Map<Integer, String> tabela = t.getTabela();
+		if(tabela == r){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
 	private void troca(int atual, int posFinal){
 		Map<Integer, String> tabela = getTabela();
 
@@ -101,6 +118,17 @@ public class Tabela {
 
 		tabela.replace(posFinal, antigo);
 		tabela.replace(atual, novo);
+
+	}
+
+	public void soluciona(Tabela atual){
+		Tabela tabelaAtual = atual;
+		Map<Integer, String> tabelaFinal = atual.getResultado();
+		if(tabelaAtual.igual(tabelaAtual, tabelaFinal)){
+			System.out.println("Solução encontrada, numero de movimentos: "+ this.contagem);
+		}else{
+
+		}
 
 	}
 
