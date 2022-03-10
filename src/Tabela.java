@@ -37,7 +37,7 @@ public class Tabela {
 		this.resultado.put(7,"6");
 		this.resultado.put(8,"5");
 		
-		return resultado;
+		return this.resultado;
 	}
 
 	public String[] getElementos(){
@@ -45,11 +45,10 @@ public class Tabela {
 	}
 
 	public boolean posDisponivel(int pos){
-		Map<Integer, String> tabela = getTabela();
+		Map<Integer, String> tabela = this.getTabela();
 		if(tabela.get(pos) == "0"){
 			return true;
 		}
-
 		return false;
 	}
 	
@@ -95,15 +94,13 @@ public class Tabela {
 		if(vizinhoAtual[posFinal] == "1"){
 			return true;
 		}else{
-
 			return false;
 		}
 
 	}
 
-	private boolean igual(Tabela t,Map<Integer, String> r){
-		Map<Integer, String> tabela = t.getTabela();
-		if(tabela == r){
+	private boolean igual(Map<Integer, String> t,Map<Integer, String> r){
+		if(t == r){
 			return true;
 		}else{
 			return false;
@@ -111,7 +108,7 @@ public class Tabela {
 	}
 
 	private void troca(int atual, int posFinal){
-		Map<Integer, String> tabela = getTabela();
+		Map<Integer, String> tabela = this.getTabela();
 
 		String antigo = tabela.get(atual);
 		String novo = tabela.get(posFinal);
@@ -121,15 +118,18 @@ public class Tabela {
 
 	}
 
-	public void soluciona(Tabela atual){
-		Tabela tabelaAtual = atual;
-		Map<Integer, String> tabelaFinal = atual.getResultado();
-		if(tabelaAtual.igual(tabelaAtual, tabelaFinal)){
+	public void soluciona(){
+		if(this.igual(this.tabela, this.getResultado())){
 			System.out.println("Solução encontrada, numero de movimentos: "+ this.contagem);
 		}else{
 
+			//soluciona();
 		}
 
+	}
+
+	public Map<Integer, String> solucionaAux(Tabela t){
+		return t.getTabela();
 	}
 
 }

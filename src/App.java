@@ -57,7 +57,7 @@ public class App {
 		g.DFS();
 		System.out.println("");
 		System.out.println("iteracoes: "+g.getContagem() );
-		t.soluciona(t);
+		t.soluciona();
 
 
 	}
