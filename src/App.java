@@ -3,6 +3,7 @@ import java.util.*;
 public class App {
 	public static void main(String[] args) {
 		Tabela t = new Tabela();
+		Graph g = new Graph(9);
 		Map<Integer, String[]> dH = new HashMap<Integer, String[]>();
 		dH.put(0, new String[] {"0", "1", "2", "1", "2", "3", "2", "3", "4"});
 		dH.put(1, new String[] {"1", "0", "1", "2", "1", "2", "3", "2", "3"});
@@ -13,9 +14,11 @@ public class App {
 		dH.put(6, new String[] {"2", "3", "4", "1", "2", "3", "0", "1", "2"});
 		dH.put(7, new String[] {"3", "2", "3", "2", "1", "2", "1", "0", "1"});
 		dH.put(8, new String[] {"4", "3", "2", "3", "2", "1", "2", "1", "0"});
-
+		
 		System.out.println("Tabela gerada aleatoriamente!");
 		t.imprime(t.getTabela());
+
+
 
 		System.out.println("--------------");
 		System.out.println("Resultado desejado: ");
@@ -36,7 +39,26 @@ public class App {
 				}
 				i++;
 			}
-			System.out.println("|");
+			
+			if(t.posDisponivel(j)){
+				System.out.println("| posicao em branco! ");
+			}else{
+				System.out.println("|");
+			}
 		}
+		System.out.println("");
+		t.move(1, 2);
+		System.out.println("");
+		System.out.println("Após mover 1 com 2");
+		t.imprime(t.getTabela());
+		System.out.println("");
+		g.addEdge(t);
+		System.out.println("DFS");
+		g.DFS();
+		System.out.println("");
+		System.out.println("iteracoes: "+g.getContagem() );
+
+
+
 	}
 }
