@@ -4,13 +4,13 @@ public class Tabela {
 	private Map<Integer, String> tabela;
 	private String[] elementos = {"0", "1", "2", "3", "4", "5", "6", "7", "8"};
 	private Map<Integer, String> resultado; // {"1", "2", "3", "8", " ", "4", "7", "6", "5"};
-	private ArrayList<Tabela> estados;
+	private ArrayList<ArrayList<String>> estados;
 	private int contagem;
 	Tabela(){
 		this.contagem = 0;
 		this.tabela = new HashMap<>();
 		this.resultado = new HashMap<>();
-		this.estados = new ArrayList<Tabela>();
+		this.estados = new ArrayList<ArrayList<String>>();
 		embaralhar(elementos);
 		for(int i = 0; i < 9; i++){
 			this.tabela.put(i, this.elementos[i]);
@@ -21,7 +21,7 @@ public class Tabela {
 		return this.tabela;
 	}
 
-	public ArrayList<Tabela> getEstados(){
+	public ArrayList<ArrayList<String>> getEstados(){
 		return this.estados;
 	}
 
@@ -44,13 +44,6 @@ public class Tabela {
 		return this.elementos;
 	}
 
-	public boolean posDisponivel(int pos){
-		Map<Integer, String> tabela = this.getTabela();
-		if(tabela.get(pos) == "0"){
-			return true;
-		}
-		return false;
-	}
 	
 	public void imprime(Map<Integer, String> t) {
 		int count = 0;
@@ -96,7 +89,13 @@ public class Tabela {
 		}else{
 			return false;
 		}
+	}
 
+	public boolean posDisponivel(int pos){
+		if(this.getTabela().get(pos) == "0"){
+			return true;
+		}
+		return false;
 	}
 
 	private boolean igual(Map<Integer, String> t,Map<Integer, String> r){
@@ -119,17 +118,45 @@ public class Tabela {
 	}
 
 	public void soluciona(){
-		if(this.igual(this.tabela, this.getResultado())){
-			System.out.println("Solução encontrada, numero de movimentos: "+ this.contagem);
-		}else{
-
-			//soluciona();
+		ArrayList<String> result = new ArrayList<>();
+		for (Integer chave: this.resultado.keySet()){  
+			result.add(this.resultado.get(chave));
 		}
+		if(this.estados.isEmpty()){
+			ArrayList<String> aux = new ArrayList<>();
+			for (Integer key: this.tabela.keySet()){  
+				aux.add(this.tabela.get(key));
+			}
+			this.estados.add(aux);
+		}
+		for(int k= 0;k < 10000;k++){
+			
+			if(this.igual(this.tabela, this.getResultado())){
+				System.out.println("Solução encontrada!");
+			}else{
+				int i;
+				for (Integer chave : this.tabela.keySet()) {
+					i = 0;
+					while(i< 9){
+						if(posDisponivel(chave) && podeMover(i, chave)){
+							this.move(i, chave);
+							ArrayList<String> aux = new ArrayList<>();
+							for (Integer key: this.tabela.keySet()){  
+								aux.add(this.tabela.get(key));
+							}
+							this.estados.add(aux);
+							
+						}
+						i++;
+					}
+					
+		
+				}
 
-	}
+			}
+		}
+		System.out.println("Número de movimentos: "+this.contagem);
 
-	public Map<Integer, String> solucionaAux(Tabela t){
-		return t.getTabela();
 	}
 
 }
